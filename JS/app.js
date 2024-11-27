@@ -4,11 +4,15 @@ const barColors = ["red", "green", "blue", "orange", "brown"];
 
 const secondXValues = [];
 const secondYValues = [];
-const secondBarColors = ["purple", "cyan", "yellow", "pink", "gray"];
+const secondBarColors = ["orchid", "cyan", "yellow", "pink", "gray"];
 
 const thirdXValues = [];
 const thirdYValues = [];
-const thirdBarColors = ["purple", "cyan", "yellow", "pink", "gray"];
+const thirdBarColors = ["purple", "cyan", "lime", "pink", "gray"];
+
+const fourthXValues = [];
+const fourthYValues = [];
+const fourthBarColors = ["maroon", "teal", "yellow", "pink", "gray"];
 
 const settings = {
   url: "https://restcountries.com/v3.1/all",
@@ -77,7 +81,7 @@ $(document).ready(function () {
       }
 
       new Chart("postengagementchart", {
-        type: "bar",
+        type: "pie",
         data: {
           labels: secondYValues,
           datasets: [
@@ -114,10 +118,10 @@ $(document).ready(function () {
       });
 
       /* -------------- third loop metrics ----- */
-    
-      for (let i = 5; i < 18; i++) {
-        const area = response[i].area; 
-        thirdXValues.push(area);
+
+      for (let i = 15; i < 28; i++) {
+        const population = response[i].population;
+        thirdXValues.push(population);
 
         const c_name = response[i].altSpellings[0];
         thirdYValues.push(c_name);
@@ -139,7 +143,7 @@ $(document).ready(function () {
           plugins: {
             title: {
               display: true,
-              text: "Country Areas",
+              text: "Impressions Breakdown",
             },
           },
           scales: {
@@ -147,7 +151,56 @@ $(document).ready(function () {
               beginAtZero: true,
               title: {
                 display: true,
-                text: "Audience",
+                text: "Impressions",
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Country",
+              },
+            },
+          },
+        },
+      });
+
+
+
+      /* -------------- fourth loop metrics ----- */
+    
+      for (let i = 35; i < 43; i++) {
+        const area = response[i].area; 
+        fourthXValues.push(area);
+
+        const c_name = response[i].altSpellings[0];
+        fourthYValues.push(c_name);
+      }
+
+      new Chart("contentperformance", {
+        type: "bar",
+        data: {
+          labels: fourthYValues,
+          datasets: [
+            {
+              backgroundColor: fourthBarColors,
+              data: fourthXValues,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Post Performance",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Engagements",
               },
             },
             x: {
